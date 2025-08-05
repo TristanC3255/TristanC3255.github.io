@@ -1,8 +1,9 @@
 function Footer() {
   return (
     <footer>
-      <p>© {new Date().getFullYear()} Tristan Chong</p>
+      <p>&copy; {new Date().getFullYear()} Tristan. All rights reserved.</p>
     </footer>
   );
 }
 
+export default Footer;

@@ -1,10 +1,25 @@
+import Header from './components/Header';
+import About from './components/About';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
+import Contact from './components/Contact';
+import Footer from './components/Footer'; 
 import './App.css';
+import './index.css';
 
-export default function App() {
+function App() {
   return (
-    <div>
-      <h1>Hello, I'm Tristan 👋</h1>
-      <p>This is my React portfolio site, deployed to GitHub Pages! </p>
+    <div className="container">
+      <Header />
+      <About />
+      <Projects />
+      <Skills />
+      <Contact />
+      <Footer />
     </div>
   );
 }
+
+export default App;
+
+
