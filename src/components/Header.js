@@ -13,7 +13,16 @@ function Header() {
 
   const handleNav = (to) => (e) => {
     e.preventDefault();
+    // If already on the same path, just scroll to top instead of animating out
+    if (to === location.pathname) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
     const page = document.querySelector('.page');
+    // Prevent double clicks while exit animation is running
+    if (page && page.classList.contains('page--exiting')) return;
+
     if (page) page.classList.add('page--exiting');
     setTimeout(() => {
       navigate(to);
