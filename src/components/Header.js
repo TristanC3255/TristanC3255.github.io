@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 const navClass = ({ isActive }) => `nav-link${isActive ? " active" : ""}`;
 
 function Header() {
   const [theme, setTheme] = useState("light");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // duration should match .page--exiting transition (200ms)
+  const EXIT_DURATION = 200;
+
+  const handleNav = (to) => (e) => {
+    e.preventDefault();
+    const page = document.querySelector('.page');
+    if (page) page.classList.add('page--exiting');
+    setTimeout(() => {
+      navigate(to);
+    }, EXIT_DURATION);
+  };
 
   useEffect(() => {
     const saved = localStorage.getItem("theme") || "light";
@@ -28,10 +42,10 @@ function Header() {
         <h1 style={{ margin: 0 }}>Tristan Chong</h1>
 
         <nav className="main-nav">
-          <NavLink to="/about" end className={navClass}>About</NavLink>
-          <NavLink to="/projects" className={navClass}>Projects</NavLink>
-          <NavLink to="/skills" className={navClass}>Skills</NavLink>
-          <NavLink to="/contact" className={navClass}>Contact</NavLink>
+          <a href="#/about" className={navClass({isActive: location.pathname === '/about'})} onClick={handleNav('/about')}>About</a>
+          <a href="#/projects" className={navClass({isActive: location.pathname === '/projects'})} onClick={handleNav('/projects')}>Projects</a>
+          <a href="#/skills" className={navClass({isActive: location.pathname === '/skills'})} onClick={handleNav('/skills')}>Skills</a>
+          <a href="#/contact" className={navClass({isActive: location.pathname === '/contact'})} onClick={handleNav('/contact')}>Contact</a>
         </nav>
       </div>
 

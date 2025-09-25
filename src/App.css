@@ -52,29 +52,19 @@ body {
   padding-top: 0.2rem; /* keep existing small top padding */
 }
 
+/* Tighter section spacing */
 section{
-  margin-block: clamp(1.5rem, 4vw, 3rem);
-  margin-bottom: 2.5rem;
+  margin-block: clamp(0.75rem, 2.5vw, 1.5rem);
 }
 
-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
+header { text-align: center; margin-bottom: 0.9rem; }
+header h1 { font-size: 2.1rem; margin-bottom: 0.15rem; }
 
 h2{
-  font-size: clamp(1.1rem, 1.2rem + .4vw, 1.5rem);
-  margin: 0 0 .75rem 0;
-  padding-bottom: .5rem;
-  border-bottom: 1px solid rgba(0,0,0,.08);
-  border-bottom: 2px solid #eee; /* retain stronger bottom border from original */
-  padding-bottom: 0.5rem; /* ensure spacing remains */
-  margin-bottom: 1rem;
+  font-size: clamp(1rem, 1.05rem + .4vw, 1.25rem);
+  margin: 0 0 0.35rem 0;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #eee;
 }
 
 nav a {
@@ -101,3 +91,47 @@ footer {
 
 .container > section:first-of-type { margin-top: 0; }
 .container > section:first-of-type h2 { margin-top: 0.15rem; }
+
+/* Page/route transition helpers (must be top-level, not nested) */
+.page-enter {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 260ms ease-out, transform 260ms ease-out;
+}
+.page-exit {
+  opacity: 1;
+}
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 200ms ease-in, transform 200ms ease-in;
+}
+
+/* Simple mount animation for the .page wrapper (works without react-transition-group) */
+/* NOTE: entry animation removed in favor of .page--mounted transition */
+
+@media (prefers-reduced-motion: reduce) {
+  .page, .page * { animation: none !important; transition: none !important; }
+}
+
+/* Animate between states using a mounted class for more reliable transitions */
+.page {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 260ms ease-out, transform 260ms ease-out;
+}
+.page--mounted {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Exit state applied before navigation to allow outgoing animation */
+.page--exiting {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 200ms ease-in, transform 200ms ease-in;
+}
