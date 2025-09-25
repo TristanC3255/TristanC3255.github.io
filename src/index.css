@@ -1,70 +1,65 @@
-/* ===== Theme Variables ===== */
 :root{
   --bg-color: #ffffff;
   --text-color: #0f172a;
   --divider-color: rgba(0,0,0,.12);
+  --accent: #1a73e8;
 }
+
 [data-theme="dark"]{
   --bg-color: #121212;
   --text-color: #e5e7eb;
-  --divider-color: rgba(255,255,255,.24);  /* bright in dark mode */
+  --divider-color: rgba(255,255,255,.12);
 }
 
-/* Smooth, in-sync theme transitions */
-body, .site-header, h2, .main-nav .nav-link::before{
-  transition: background-color .25s ease, color .25s ease, border-color .25s ease, opacity .25s ease;
-}
-
-/* ===== Base ===== */
+/* Base and reset */
 * { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; padding: 0; }
 body{
   margin: 0;
   background: var(--bg-color);
   color: var(--text-color);
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: 'Segoe UI', 'Roboto', 'Arial', 'Helvetica Neue', sans-serif;
   line-height: 1.6;
+  transition: background-color .25s ease, color .25s ease;
 }
 
-/* optional: keep content close to header */
-.container{ padding-top: .2rem; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
 
+/* Layout container */
+.container{
+  width: min(1100px, 94vw);
+  max-width: 1200px;
+  margin-left: clamp(1.25rem, 6vw, 6rem);
+  margin-right: auto;
+  padding-block: 2rem;
+  padding-top: 0.2rem; /* small top padding kept */
+}
+
+/* Site header */
 .site-header{
-  position: sticky;      
+  position: sticky;
   top: 0;
   z-index: 20;
   background: var(--bg-color);
   padding: 0.6rem 1.25rem 0.2rem;
+  border-bottom: 1px solid var(--divider-color);
+  transition: background-color .25s ease, border-color .25s ease;
 }
 
-.site-header::after{
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: var(--divider-color);     
-  transition: background-color .25s ease;
-}
-
-
-
-.main-nav{ display:flex; align-items:center; }
-
+/* Navigation */
+.main-nav { display: flex; align-items: center; }
 .nav-link{
   position: relative;
-  display: inline-block;    
+  display: inline-block;
   margin: 0;
   padding: 0;
-  text-decoration: none;
   font-weight: 600;
   color: var(--text-color);
   line-height: 1.2;
   opacity: .9;
+  transition: opacity .2s ease;
 }
 .nav-link:hover{ opacity: 1; }
-
-
 .nav-link + .nav-link{ margin-left: 1.5rem; }
 .nav-link + .nav-link::before{
   content: "";
@@ -73,12 +68,10 @@ body{
   top: 50%;
   transform: translateY(-50%);
   width: 1px;
-  height: 1.05em;
-  background: var(--divider-color);     
-  opacity: .8;
+  height: 1em;
+  background: #9aa0a6;
+  opacity: .6;
 }
-
-
 .nav-link.active::after{
   content: "";
   position: absolute;
@@ -89,42 +82,52 @@ body{
   border-radius: 2px;
 }
 
+/* Utilities */
+.flex { display: flex; align-items: center; justify-content: center; }
+.center { text-align: center; }
 
-h2{
-  margin: .15rem 0 .6rem;
-  padding-bottom: .5rem;
-  border-bottom: 1px solid var(--divider-color); 
-}
-
-
-.theme-toggle{ margin-left: 1rem; }
-
-.switch{
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
-}
-.switch input{ opacity: 0; width: 0; height: 0; }
-
-.slider{
-  position: absolute;
+/* Buttons */
+button, .btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  inset: 0;
-  background-color: #ccc;
-  transition: .45s;
-  border-radius: 34px;
+  font-size: 1rem;
+  transition: background 0.2s;
 }
-.slider:before{
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: .45s;
-  border-radius: 50%;
+button:hover, .btn:hover { background: #0056b3; }
+
+/* Cards */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
 }
-.switch input:checked + .slider{ background-color: #2196F3; }
-.switch input:checked + .slider:before{ transform: translateX(26px); }
+
+/* Headings and sections */
+h2{
+  font-size: clamp(1.1rem, 1.2rem + .4vw, 1.5rem);
+  margin: 0 0 .75rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #eee;
+}
+section{ margin-block: clamp(1.5rem, 4vw, 3rem); }
+
+footer{
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container { max-width: 95vw; padding: 0 0.5rem; }
+  .card { padding: 1rem; }
+}
+
