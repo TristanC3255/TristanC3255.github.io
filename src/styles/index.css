@@ -29,7 +29,7 @@
   --muted-text: #CBD5E1;
   --card: #27323D;
   --border: #374151;
-  --divider-color: #374151;
+  --divider-color: #F9FAFB;
 
   /* Accent colors (adjusted for dark) */
   --accent: #A5C9CA;
@@ -139,21 +139,53 @@ ul, ol { list-style: none; }
 
 /* Typography and sections */
 h2{
-  font-size: clamp(1.1rem, 1.2rem + .4vw, 1.5rem);
-  margin: 0 0 .75rem 0;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #eee;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--accent);
+  color: var(--text-color);
+  font-weight: 700;
+  letter-spacing: -0.025em;
 }
 
 section{ 
-  margin-block: clamp(1.5rem, 4vw, 3rem);
+  margin-block: clamp(2rem, 5vw, 3.5rem);
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1rem;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: background-color .25s ease, border-color .25s ease;
 }
 
-.muted { color: var(--muted-text); }
+.muted { 
+  color: var(--muted-text); 
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* Add better paragraph spacing in sections */
+section p {
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+section p:last-child {
+  margin-bottom: 0;
+}
+
+/* Better list styling in sections */
+section ul, section ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+section li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
 
 /* Components */
 .flex { display: flex; align-items: center; justify-content: center; }
@@ -178,6 +210,7 @@ button:hover, .btn:hover { background: #0056b3; }
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   padding: 1.5rem;
   margin-bottom: 2rem;
+  transition: background-color .25s ease;
 }
 
 /* Footer */
@@ -189,6 +222,7 @@ footer{
   margin-top: auto;
   font-size: 0.9rem;
   color: var(--text-color);
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
 }
 
 /* Links */
@@ -215,7 +249,7 @@ a:hover { color: var(--link-hover); }
   height: 18px; 
   border-radius: 50%; 
   background: var(--switch-thumb); 
-  transition: left .25s; 
+  transition: left .25s ; 
 }
 
 [data-theme="dark"] .theme-switch__thumb { left: 23px; }
@@ -224,4 +258,14 @@ a:hover { color: var(--link-hover); }
 @media (max-width: 768px) {
   .container { max-width: 95vw; padding: 0 0.5rem; }
   .card { padding: 1rem; }
+  
+  section {
+    padding: 1.5rem;
+    margin-block: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    margin-bottom: 1rem;
+  }
 }
