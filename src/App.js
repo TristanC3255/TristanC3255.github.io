@@ -1,11 +1,12 @@
 import Header from "./components/Header";
-import About from "./components/About";
-import Projects from "./components/Projects";
-import Skills from "./components/Skills";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import "./App.css";
-import "./index.css";
+import About from "./sections/About";
+import Projects from "./sections/Projects";
+import Skills from "./sections/Skills";
+import Contact from "./components/Contact";
+
+import "./styles/App.css";
+import "./styles/index.css";
 
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";

@@ -1,0 +1,49 @@
+/* App-specific overrides and page transitions only */
+
+/* Specific section spacing adjustments */
+.container > section:first-of-type { margin-top: 0; }
+.container > section:first-of-type h2 { margin-top: 0.15rem; }
+
+/* Page/route transition helpers (must be top-level, not nested) */
+.page-enter {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 260ms ease-out, transform 260ms ease-out;
+}
+.page-exit {
+  opacity: 1;
+}
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 200ms ease-in, transform 200ms ease-in;
+}
+
+/* Simple mount animation for the .page wrapper (works without react-transition-group) */
+/* NOTE: entry animation removed in favor of .page--mounted transition */
+
+@media (prefers-reduced-motion: reduce) {
+  .page, .page * { animation: none !important; transition: none !important; }
+}
+
+/* Animate between states using a mounted class for more reliable transitions */
+.page {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 260ms ease-out, transform 260ms ease-out;
+}
+.page--mounted {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Exit state applied before navigation to allow outgoing animation */
+.page--exiting {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 200ms ease-in, transform 200ms ease-in;
+}
