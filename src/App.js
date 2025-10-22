@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import About from "./sections/About";
 import Projects from "./sections/Projects";
 import Skills from "./sections/Skills";
-import Contact from "./components/Contact";
+import Contact from "./sections/Contact";
 
 import "./styles/App.css";
 import "./styles/index.css";
